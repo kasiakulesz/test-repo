@@ -34,13 +34,13 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
-        uses: actions/dist
+        uses: actions/upload-pages-artifact@v3
         with:
-      - uses: actions/setup-node@v4
-      - run: npm install
-      - run: npm run build -- --base=/test-repo/
+        - uses: actions/setup-node@v4
+        - run: npm install
+        - run: npm run build -- --base=/test-repo/
           # Upload entire repository
-          path: '.'
+          path: 'dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
