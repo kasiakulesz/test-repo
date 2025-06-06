@@ -9,17 +9,37 @@
   </head>
   <body>
     <main>
-      <div id="app"></div>
-      <h1 class="text-2xl pl-10 font-bold">Articles</h1>
+      <section>
+        <div id="app"></div>
+      </section>
+      <section>
+        <h1 class="text-2xl pl-10 font-bold">Articles</h1>
       <form class="sort_box pl-10">
         <label for="sort">Sortuj</label>
         <select name="sort" id="sort">
-          <option value="ascending">Po dacie rosnąco</option>
           <option value="descending">Po dacie malejąco</option>
+          <option value="ascending">Po dacie rosnąco</option>
           <option value="abc">Po nazwie alfabetycznie</option>
         </select>
       </form>
       <div id="articles" class="p-10"></div>
+      </section>
+      <section class="m-20 bg-pink-100 text-pink-800 align-text-bottom rounded">
+        <h2 class="text-2xl p-5 font-bold">Dodaj nowy artykuł</h2>
+        <form id="add-article" class="p-5 grid grid-rows-6 gap-2 align-baseline">
+          <label for="title" class="mt-2">Tytuł: </label>
+          <input type="text" id="title" class="bg-white m-1 col-span-4 rounded" required/>
+          <label for="subtitle" class="mt-2">Podtytuł: </label>
+          <input type="text" id="subtitle" class="bg-white m-1 col-span-4 rounded" required/>
+          <label for="title" class="mt-2 col-span-1">Autor: </label>
+          <input type="text" id="author" class="bg-white m-1 col-span-1 rounded" required/>
+          <label for="date" class="mt-2 col-span-1">Data: </label>
+          <input type="datetime-local" id="date" name="created_at" class="bg-white m-1 col-span-1 p-1 rounded" required />
+          <label for="content" class="mt-2">Treść: </label>
+          <textarea id="content" class="bg-white m-1 col-span-4" rounded required></textarea>
+          <button type="submit" class="bg-pink-300 p-2 mt-2 w-auto justify-self-center rounded text-white font-semibold col-span-4">Dodaj na stronę</button>
+        </form>
+      </section>
       </main>
     <script type="module" src="/src/main.js"></script>
   </body>

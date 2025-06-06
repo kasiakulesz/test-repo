@@ -27,7 +27,7 @@ setupCounter(document.querySelector('#counter'))
 const fetchArticles = async () => {
   try {
     const response = await fetch(
-      'https://nrlitwvxtepgxqtmukuh.supabase.co/rest/v1/articles?select=*', {
+      'https://nrlitwvxtepgxqtmukuh.supabase.co/rest/v1/articles?select=*' + sort, {
         headers: {
           apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ybGl0d3Z4dGVwZ3hxdG11a3VoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgwNzk3ODMsImV4cCI6MjA2MzY1NTc4M30.MzdeaeuY5cgVBNgqOXBLLFHo0JG9ugWbhqLVOHvB2Ng',
   },
@@ -53,7 +53,7 @@ const loadArticles = async () => {
       </div>
       <div class="flex gap-2 items-baseline">
         <p class="font-semibold">${article.author}</p>
-        <p class="font-light text-xs">${new Date(article.created_at).toLocaleString()}</p>
+        <p class="font-light text-xs">${format(new Date(article.created_at), 'dd-MM-yyyy')}</p>
       </div>
       <p>${article.content}</p>
       <hr class="w-50 h-px mx-auto my-8 bg-gray-300 border-0">
@@ -62,9 +62,9 @@ const loadArticles = async () => {
   });
 };
 
-const sortSelect(selElm) {
-
-}
-
+/*document.getElementById('sort').addEventListener('change', (e) => {
+  const sortOrder = document.getElementById("sort").value;
+  loadArticles(sortOrder);
+});*/
 
 loadArticles()
