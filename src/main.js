@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.js'
 
 document.querySelector('#app').innerHTML = `
-  <div>
+  <div class="p-10">
     <a href="https://vite.dev" target="_blank">
       <img src="${viteLogo}" class="logo" alt="Vite logo" />
     </a>
@@ -23,3 +23,40 @@ document.querySelector('#app').innerHTML = `
 
 setupCounter(document.querySelector('#counter'))
 
+const fetchArticles = async () => {
+  try {
+    const response = await fetch(
+      'https://nrlitwvxtepgxqtmukuh.supabase.co/rest/v1/articles?select=*', {
+        headers: {
+          apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ybGl0d3Z4dGVwZ3hxdG11a3VoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgwNzk3ODMsImV4cCI6MjA2MzY1NTc4M30.MzdeaeuY5cgVBNgqOXBLLFHo0JG9ugWbhqLVOHvB2Ng',
+  },
+  });
+  const data = await response.json();
+  console.log(data);
+  return data;
+  } catch (error) {
+  console.error('Fetch error:', error);
+  alert('Błąd wgrywania artykułów')
+  }
+};
+
+const loadArticles = async () => {
+  const articles = await fetchArticles();
+  articles.forEach(article => {
+    const div = document.createElement('div');
+    document.getElementById("articles").innerHTML += `
+    <div class="article_box">
+      <h3 class="text-xl font-bold">${article.title}</h3>
+      <h4>${article.subtitle}</h4>
+      <div class="flex gap-2">
+        <p class="font-bold">${article.author}</p>
+        <p>${new Date(article.created_at).toLocaleString()}</p>
+      </div>
+      <p>${article.content}</p>
+      <hr/>
+    </div>
+    `;
+  });
+};
+
+loadArticles()
