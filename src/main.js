@@ -46,17 +46,20 @@ const loadArticles = async () => {
     const div = document.createElement('div');
     document.getElementById("articles").innerHTML += `
     <div class="article_box">
-      <h3 class="text-xl font-bold">${article.title}</h3>
-      <h4>${article.subtitle}</h4>
-      <div class="flex gap-2">
-        <p class="font-bold">${article.author}</p>
-        <p>${new Date(article.created_at).toLocaleString()}</p>
+      <div class="flex flex-row gap-2 items-baseline">
+        <h3 class="text-2xl font-bold">${article.title} • </h3>
+        <h4 class="text-xl font-semibold">${article.subtitle}</h4>
+      </div>
+      <div class="flex gap-2 items-baseline">
+        <p class="font-semibold">${article.author}</p>
+        <p class="font-light text-xs">${new Date(article.created_at).toLocaleString()}</p>
       </div>
       <p>${article.content}</p>
-      <hr/>
+      <hr class="w-50 h-px mx-auto my-8 bg-gray-300 border-0">
     </div>
     `;
   });
 };
+
 
 loadArticles()
