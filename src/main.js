@@ -25,6 +25,17 @@ document.querySelector('#app').innerHTML = `
 setupCounter(document.querySelector('#counter'))
 
 const fetchArticles = async () => {
+  const sortOption = document.getElementById('sort').value;
+  let sort = '';
+
+  if (sortOption === 'descending') {
+    sort = '&order=created_at.desc';
+  } else if (sortOption === 'ascending') {
+    sort = '&order=created_at.asc';
+  } else if (sortOption === 'abc') {
+    sort = '&order=title.asc';
+  }
+  
   try {
     const response = await fetch(
       'https://nrlitwvxtepgxqtmukuh.supabase.co/rest/v1/articles?select=*' + sort, {
@@ -49,8 +60,8 @@ const loadArticles = async () => {
     document.getElementById("articles").innerHTML += `
     <div class="article_box">
       <div class="flex flex-row gap-2 items-baseline">
-        <h3 class="text-2xl font-bold text-pink-800">${article.title} • </h3>
-        <h4 class="text-xl font-semibold">${article.subtitle}</h4>
+        <h3 class="text-2xl font-bold text-pink-800">${article.title}</h3>
+        <h4 class="text-xl font-semibold">•  ${article.subtitle}</h4>
       </div>
       <div class="flex gap-2 items-baseline mb-2">
         <p class="font-semibold text-pink-300">${article.author}</p>
@@ -97,3 +108,4 @@ document.getElementById('add-article').addEventListener('submit', async (e) => {
 });
 
 loadArticles()
+document.getElementById('sort').addEventListener('change', loadArticles);
