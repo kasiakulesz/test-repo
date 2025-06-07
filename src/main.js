@@ -42,17 +42,18 @@ const fetchArticles = async () => {
 };
 
 const loadArticles = async () => {
+  document.getElementById("articles").innerHTML = "";
   const articles = await fetchArticles();
   articles.forEach(article => {
     const div = document.createElement('div');
     document.getElementById("articles").innerHTML += `
     <div class="article_box">
       <div class="flex flex-row gap-2 items-baseline">
-        <h3 class="text-2xl font-bold">${article.title} • </h3>
+        <h3 class="text-2xl font-bold text-pink-800">${article.title} • </h3>
         <h4 class="text-xl font-semibold">${article.subtitle}</h4>
       </div>
-      <div class="flex gap-2 items-baseline">
-        <p class="font-semibold">${article.author}</p>
+      <div class="flex gap-2 items-baseline mb-2">
+        <p class="font-semibold text-pink-300">${article.author}</p>
         <p class="font-light text-xs">${format(new Date(article.created_at), 'dd-MM-yyyy')}</p>
       </div>
       <p>${article.content}</p>
@@ -90,7 +91,8 @@ document.getElementById('add-article').addEventListener('submit', async (e) => {
       created_at: form.created_at.value ? new Date(form.created_at.value).toISOString() : new Date().toISOString(),
       content: form.content.value
     };
-    createNewArticle(articleData);
+    await createNewArticle(articleData);
+    await loadArticles();
     form.reset();
 });
 
