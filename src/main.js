@@ -62,9 +62,36 @@ const loadArticles = async () => {
   });
 };
 
-/*document.getElementById('sort').addEventListener('change', (e) => {
-  const sortOrder = document.getElementById("sort").value;
-  loadArticles(sortOrder);
-});*/
+const createNewArticle = async (articleData) => {
+  try {
+    const response = await fetch('https://nrlitwvxtepgxqtmukuh.supabase.co/rest/v1/articles?select=*' , {
+      method: 'POST',
+      headers: {
+        apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ybGl0d3Z4dGVwZ3hxdG11a3VoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgwNzk3ODMsImV4cCI6MjA2MzY1NTc4M30.MzdeaeuY5cgVBNgqOXBLLFHo0JG9ugWbhqLVOHvB2Ng' ,
+        'Content-Type' : 'application/json' ,
+    },
+    body: JSON.stringify (articleData),
+  });
+  if (response.status !== 201) {
+    throw new Error(`Status: ${response.status}`);
+  }
+  } catch (error) {
+    console.error('Fetch error:' , error);
+  }
+};
+
+document.getElementById('add-article').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const articleData = {
+      title: form.title.value,
+      subtitle: form.subtitle.value,
+      author: form.author.value,
+      created_at: form.created_at.value ? new Date(form.created_at.value).toISOString() : new Date().toISOString(),
+      content: form.content.value
+    };
+    createNewArticle(articleData);
+    form.reset();
+});
 
 loadArticles()
