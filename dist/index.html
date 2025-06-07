@@ -3,13 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="./vite.svg" />
-    <link href="/src/styles.css" rel="stylesheet">
+    <link href="src/styles.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
-    <script type="module" crossorigin src="./assets/index-CTtto4ul.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-C4rVVWR-.css">
+    <script type="module" crossorigin src="./assets/index-Di34_gs0.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DGPNMbxS.css">
   </head>
   <body>
-    <div id="app"></div>
+    <main>
+      <section>
+        <div id="app"></div>
+      </section>
+      <section>
+        <h1 class="text-3xl text-pink-800 pl-10 font-bold">Articles</h1>
+      <form class="sort_box pl-10">
+        <label for="sort">Sortuj</label>
+        <select name="sort" id="sort">
+          <option value="descending">Po dacie malejąco</option>
+          <option value="ascending">Po dacie rosnąco</option>
+          <option value="abc">Po nazwie alfabetycznie</option>
+        </select>
+      </form>
+      <div id="articles" class="p-10"></div>
+      </section>
+      <section class="m-auto w-fit bg-pink-100 text-pink-800 align-text-bottom rounded mb-50">
+        <form id="add-article" class="p-5 inline-grid gap-2 align-baseline">
+          <h2 class="text-2xl font-bold col-span-4">Dodaj nowy artykuł</h2>
+          <label for="title" class="mt-2 col-span-4">Tytuł: </label>
+          <input type="text" id="title" class="bg-white col-span-4 rounded p-1 focus:outline-pink-800" required/>
+          <label for="subtitle" class="mt-2 col-span-4">Podtytuł: </label>
+          <input type="text" id="subtitle" class="bg-white col-span-4 rounded p-1 focus:outline-pink-800" required/>
+          <label for="title" class="mt-2 col-span-1">Autor: </label>
+          <input type="text" id="author" class="bg-white col-span-1 mt-2 rounded p-1 focus:outline-pink-800" required/>
+          <label for="date" class="mt-2 col-span-1">Data: </label>
+          <input type="datetime-local" id="date" name="created_at" class="mt-2 bg-white col-span-1 p-1 rounded focus:outline-pink-800" required />
+          <label for="content" class="mt-2">Treść: </label>
+          <textarea id="content" class="bg-white col-span-4 rounded p-1 focus:outline-pink-800" required></textarea>
+          <button type="submit" id="submit" class="cursor-pointer bg-pink-300 p-2 mt-2 w-auto justify-self-center rounded text-white font-semibold col-span-4">Dodaj na stronę</button>
+        </form>
+      </section>
+      </main>
   </body>
 </html>
